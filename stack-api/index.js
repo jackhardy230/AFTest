@@ -1,0 +1,22 @@
+require('./db.js')
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+
+var registerRoutes = require('./controllers/userController')
+var categoryRoutes = require('./controllers/categoryController')
+var productRoutes = require('./controllers/productController')
+var cartRoutes = require('./controllers/cartController')
+var commentRoutes = require('./controllers/commentRoute')
+
+var app = express()
+app.use(bodyParser.json())
+app.use(cors({origin:'http://localhost:3000'}))
+app.listen(3500,()=>console.log('Server started at : 3500'))
+
+app.use('/user',registerRoutes)
+app.use('/category',categoryRoutes)
+app.use('/product',productRoutes)
+app.use('/cart',cartRoutes)
+app.use('/comments',commentRoutes)
+app.use(express.static('public'))
